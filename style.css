@@ -16,6 +16,10 @@ html{
   scroll-behavior:smooth;
 }
 
+p {
+  margin-bottom:13px;
+}
+
 body{
   min-height:100vh;
   display:flex;
@@ -80,6 +84,11 @@ body{
   transition:
     transform .6s ease,
     opacity .6s ease;
+}
+
+h3 {
+  text-align:center;
+  margin-bottom:20px;
 }
 
 .card.show{
@@ -394,6 +403,10 @@ width:48px;
 height:48px;
 }
 
+.modal-content {
+max-width: 90% !important;
+}
+
 }
 
 /* =========================
@@ -406,4 +419,101 @@ height:48px;
 margin-top:18px;
 }
 
+}
+
+/* ========================
+   MODAL POP-UP
+   ===================== */
+
+.popup-trigger {
+    cursor: pointer;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.popup-trigger:hover {
+    transform: scale(1.02);
+    filter: brightness(0.9);
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.45);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.modal-bg-blur {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    filter: blur(60px) brightness(0.9);
+    z-index: -1;
+    pointer-events: none;
+    transform: scale(1.1);
+}
+
+.modal-content {
+    position: relative;
+    max-width: 85%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    z-index: 2;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#modalCaption {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    animation: fadeInCaption 0.4s ease;
+}
+
+.close-button {
+    position: absolute;
+    top: -45px;
+    right: 5px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 38px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+    user-select: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.close-button:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+@keyframes fadeInCaption {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
