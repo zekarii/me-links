@@ -193,6 +193,7 @@ height="18"
 alt="Arrow">
 
 </div>
+</a>
 
 <a
 class="btn"
@@ -286,6 +287,21 @@ alt="Arrow">
 
 </div>
 
+<!-- RULES -->
+<div class="card links reveal">
+    <h3>Rules (Commissions)</h3>
+    <p>1. Work will not commence until full payment is made.</p>
+    <p>2. I reserve the right to denounce the skin or render I created if the buyer commits a wrongdoing.</p>
+    <p>3. The use of NSFW references for my commissions are strictly prohibited. (Some exceptions maybe considered)</p>
+    <p>4. If the buyer wants a faster estimated completion time, they can pay an additional fee.</p>
+    <p>5. Customers are free to choose what pose and/or skin color they would like.</p>
+    <p>6. The License from all Skins or Render commissions made from me will be given to customers right after they pay.</p>
+    <p>7. Refunds cannot be processed while the creation of a skin or render is in progress.</p>
+    <p>8. Buyers will be given the watermarked results before payment for review.</p>
+    <p>9. I only handle 3 commissions (Skin and render) in the queue per day.</p>
+    <p>10. All Informations (Renders or Skins Commissions and Queue) will be sent at my WhatsApp Channel.</p>
+</div>"
+
 <!-- GALLERY -->
 
 <div class="card gallery reveal">
@@ -297,11 +313,11 @@ alt="Arrow">
     <div class="grid">
 
         <div class="item">
-            <img src="images/Minecraft_Skin_Female.png" alt="Minecraft Skin Female">
+            <img src="images/Minecraft_Skin_Female.png" alt="Minecraft Skin Female" class="popup-trigger">
         </div>
 
         <div class="item">
-            <img src="images/Minecraft_Skin_Male.png" alt="Minecraft Skin Male">
+            <img src="images/Minecraft_Skin_Male.png" alt="Minecraft Skin Male" class="popup-trigger">
         </div>
 
     </div>
@@ -311,11 +327,11 @@ alt="Arrow">
     <div class="grid">
 
         <div class="item">
-            <img src="images/Library_Yuki.png" alt="Library Render">
+            <img src="images/Library_Yuki.png" alt="Library Render" class="popup-trigger">
         </div>
 
         <div class="item">
-            <img src="images/Aria_Yuki.png" alt="Aria Yuki">
+            <img src="images/Aria_Yuki.png" alt="Aria Yuki" class="popup-trigger">
         </div>
 
         <p class="p">*i will add more later</p>
@@ -351,24 +367,63 @@ rel="noopener">
 
 </div>
 
+<div id="imageModal" class="modal-overlay">
+    <img id="modalBgBlur" src="" alt="" class="modal-bg-blur">
+    
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <img id="modalImg" src="" alt="Popup Display">
+        <p id="modalCaption"></p>
+    </div>
+</div>
+
+
 <script>
+const reveal = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+}, {threshold: .1});
+reveal.forEach(el => observer.observe(el));
 
-const reveal=document.querySelectorAll('.reveal');
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImg');
+const modalBgBlur = document.getElementById('modalBgBlur');
+const modalCaption = document.getElementById('modalCaption');
+const closeBtn = document.querySelector('.close-button');
+const triggers = document.querySelectorAll('.popup-trigger');
 
-const observer=new IntersectionObserver(entries=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-entry.target.classList.add('show');
-}
-
+triggers.forEach(trigger => {
+    trigger.addEventListener('click', function() {
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.style.opacity = '1';
+        }, 10);
+        
+        modalImg.src = this.src; 
+        modalImg.alt = this.alt;
+        modalBgBlur.src = this.src;
+        modalCaption.innerText = this.alt;
+    });
 });
 
-},{threshold:.1});
+function hideModal() {
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
 
-reveal.forEach(el=>observer.observe(el));
+closeBtn.addEventListener('click', hideModal);
 
+modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+        hideModal();
+    }
+});
 </script>
 
 </body>
